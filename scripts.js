@@ -26,22 +26,20 @@ function playRound(playerSelection, computerSelection) {
             playerSelection = getPlayerSelection();
             computerSelection = getComputerChoice();
         }
-        if ( playerSelection === "rock" && computerSelection === "paper") {
-            return("Paper beats rock, you lose!");
-        } else if ( playerSelection === "rock" && computerSelection === "scissors") {
-            return("Rock beats scissors, you won!");
-        } else if ( playerSelection === "paper" && computerSelection === "scissors") {
-            return("Scissors beats paper, you lose!");
-        } else if ( playerSelection === "paper" && computerSelection === "rock") {
-            return("Paper beats rock, you won!");
-        } else if ( playerSelection === "scissors" && computerSelection === "rock") {
-            return("Rock beats scissors, you lose!");
-        } else if( playerSelection === "scissors" && computerSelection === "paper") {
-            return("Scissors beats paper, you won!");
-        }    
-      }
-    }
-    
-     
-  console.log(playRound(playerSelection, computerSelection));
+        if (( playerSelection === "rock" && computerSelection === "paper") || 
+            ( playerSelection === "paper" && computerSelection === "scissors") ||
+            ( playerSelection === "scissors" && computerSelection === "rock")) {  
+                      
+            return(`${computerSelection} beats ${playerSelection}, you lose!`);
+        } else if (( playerSelection === "rock" && computerSelection === "scissors") ||
+                   ( playerSelection === "paper" && computerSelection === "rock") ||
+                   ( playerSelection === "scissors" && computerSelection === "paper")) { 
+
+            return(`${playerSelection} beats ${computerSelection}, you won!`);
+        } 
+    }    
+}
+
+
+console.log(playRound(playerSelection, computerSelection));
 

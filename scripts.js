@@ -22,28 +22,10 @@ function getPlayerSelection() {
 var playerScore = 0;
 const playerWon = (`${playerSelection} beats ${computerSelection}, point to player!
 Current score: You: ${playerScore} Computer: ${computerScore}`);
+
 var computerScore = 0;
 const computerWon = (`${computerSelection} beats ${playerSelection}, point to computer!
 Current score: You: ${playerScore} Computer: ${computerScore}`);
-
-function game() {
-    while ((playerScore || computerScore) < 5) {
-        playerSelection = getPlayerSelection();
-        computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-        if (playerScore === 5) {
-            console.log("Good job, you have beat the computer!");
-            break;
-        } else if (computerScore === 5) {
-            console.log("Tough luck next time, the computer beat you...");
-            break;
-        }
-    } 
-    
-}
-
-
-console.log(game(playerSelection, computerSelection));
 
 function playRound() {
     while (playerSelection === computerSelection) {
@@ -68,5 +50,21 @@ function playRound() {
     }
 }
 
+function game() {
+    while ((playerScore || computerScore) < 5) {
+        playerSelection = getPlayerSelection();
+        computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        if (playerScore === 5) {
+            console.log("Good job, you have beat the computer!");
+            break;
+        } else if (computerScore === 5) {
+            console.log("Tough luck next time, the computer beat you...");
+            break;
+        }
+    } 
+    playerScore = 0;
+    computerScore = 0;
+}
 
-
+console.log(game(playerSelection, computerSelection));

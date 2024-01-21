@@ -26,28 +26,49 @@ playerScissors.addEventListener('click', () =>{
     playRound(playerSelection, computerSelection);
 });
 
+
+
+function deleteChildElements(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+};
+
 let playerScore = 0;
 let computerScore = 0;
 
+const winMessage = document.getElementById("winMessage");
+const playerScoreboard = document.getElementById("player");
+const computerScoreboard = document.getElementById("computer");
+
 function playRound() {
-    const playerWon =`${playerSelection} beats ${computerSelection}, point to player!
-    current score: you: ${playerScore} computer: ${computerScore}`;
-    const computerWon = `${computerSelection} beats ${playerSelection}, point to computer!
-    current score: you: ${playerScore} computer: ${computerScore}`;
+    deleteChildElements(winMessage);  
+    let gameMessage = document.createElement("div");
+
+    const playerWon =`${playerSelection} beats ${computerSelection}, point to player!`;
+    const computerWon = `${computerSelection} beats ${playerSelection}, point to computer!`;
+    const tieGame =`it's a tie! go again`;
 
     if (playerSelection === computerSelection) {
-        console.log("it's a tie! go again.");
+            gameMessage.innerHTML = tieGame;
     } else if((playerSelection === "rock" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "rock")) {
-        computerScore += 1;
-        console.log(computerWon);
+            let newComputerScore = document.createElement("p");
+            computerScore.innerHTML = `Computer: ${computerScore+= 1}`;
+            deleteChildElements(computerScoreboard);
+            computerScoreboard.append(computerScore);
+            gameMessage.innerHTML = computerWon;
     } else if ((playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "paper" && computerSelection === "rock") ||
         (playerSelection === "scissors" && computerSelection === "paper")) {
-            playerScore += 1;
-            console.log(playerWon);
+            let newPlayerScore = document.createElement("p");
+            playerScore.innerHTML = `Player: ${playerScore+= 1}`;
+            deleteChildElements(playerScoreboard);
+            playerScoreboard.append(playerScore);
+            gameMessage.innerHTML = playerWon;
     };
 
+    winMessage.append(gameMessage);
     computerSelection = getComputerChoice();
 };
